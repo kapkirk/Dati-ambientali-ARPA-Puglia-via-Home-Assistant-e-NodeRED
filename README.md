@@ -32,7 +32,7 @@ Una utility [Home Assistant](https://home-assistant.io/) che ti aiuta a visualiz
 
 ## Descrizione del progetto
 
-Scopo principale di queste righe è quello di automatizzare l`acquisizione giornaliera di dati ambientali pubblicati tramite API dalla Agenzia Regionale Protezione e Prevenzione Ambientale per la Puglia, la loro elaborazione tramite Node-RED e la successiva integrazione in Home Assistant tramite pubblicazione MQTT per la visualizzazione in tempo reale.
+Scopo principale di queste righe è quello di automatizzare l`acquisizione giornaliera di dati ambientali pubblicati tramite API dalla Agenzia Regionale Protezione e Prevenzione Ambientale per la Puglia, la loro elaborazione tramite Node-RED e la diretta esposizione  in Home Assistant.
 
 Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia.it/pagina2795_aria.html) secondo al [mappa](https://dati.arpa.puglia.it/qaria?footer=false%EF%BB%BF)
 
@@ -58,7 +58,6 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 [API_Regione_Puglia](https://dati.arpa.puglia.it/openapi/index.html)
 
 - **Workflow Node-RED**: Flusso configurato per interrogare giornalmente le API, processare i dati (formattazione, validazione) e inviarli a un broker MQTT.
-- **Comunicazione MQTT**: Trasmissione sicura dei dati a Home Assistant tramite protocollo MQTT, con topic dedicati per ciascun sensore.
 - **Custom Sensor in Home Assistant**: Configurazione di sensori personalizzati in HA per ricevere i dati via MQTT e visualizzarli in dashboard.
 - **Automazione Giornaliera**: Schedulazione degli aggiornamenti per garantire dati sempre aggiornati senza intervento manuale.
 
@@ -88,10 +87,10 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 ### 1 - Prerequisiti
 
 - Node-RED installato e configurato con nodi:
-  - `node-red-contrib-mqtt`
   - `node-red-contrib-http-request`
-- Broker MQTT (es. Mosquitto) in esecuzione e integrato con Home Assistant.
-- Custom `flex-table-card` scaricabile da HACS installata e configurata (Se volete utilizzare la tabella di visualizzazione come ho fatto io).
+- Home Assistant installato con le seguenti dipendenze HACS:
+  - Custom `flex-table-card` scaricabile (Se volete utilizzare la tabella di visualizzazione come ho fatto io)
+  - Node-RED Comapnion.
 
 
 ### 2 - Configurazione dei dati da acquisire
@@ -193,139 +192,10 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 ### 3 - Configurazione Home Assistant
 
 1. Scaricare tutti i files;
-1. Copiare il contenuto di `sensori HA.txt` in  `configuration.yaml`. Se la voce `mqtt:` è già presente, accodate i sensori a quelli già presenti;
-1. Potete aggiungere altri sensori se la centraline da voi scelte ne mostrano altri, vla configurazione è identica per tutti;
 1. La seguente configurazione esporrà i sensori in HA come vedete di seguito:
 
 ![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Esposizione%20HA.jpg)
 
-
-
-codice:
-```yaml
-
-# configuration.yaml
-
-#*******************************************************
-#                                                      *
-#                    Sensori qualità ambiente          *
-#                                                      *
-#*******************************************************
-
-mqtt:
-  sensor:
-    - name: "NO2"
-      state_topic: "sensors/no2"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/no2"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        }
-
-    - name: "PM10"
-      state_topic: "sensors/pm10"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/pm10"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        } 
-
-    - name: "PM25"
-      state_topic: "sensors/pm25"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/pm25"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        }         
-        
-    - name: "SO2"
-      state_topic: "sensors/so2"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/so2"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        }         
-        
-    - name: "C6H6"
-      state_topic: "sensors/c6h6"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/c6h6"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        }         
-        
-    - name: "CO"
-      state_topic: "sensors/co"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/co"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        } 
-        
-    - name: "IPA"
-      state_topic: "sensors/ipa"
-      unit_of_measurement: "µg/m³"
-      value_template: "{{ value_json.valore }}"
-      json_attributes_topic: "sensors/ipa"
-      json_attributes_template: >
-        {
-          "data": "{{ value_json.data }}",
-          "inquinante": "{{ value_json.inquinante }}",
-          "limite": {{ value_json.limite }},
-          "unita": "{{ value_json.unita }}",
-          "indice_qualita": "{{ value_json.indice_qualita }}",
-          "classe_qualita": "{{ value_json.classe_qualita }}",
-          "superamenti": {{ value_json.superamenti }}
-        } 
-```
 
 1. Nella _Dashbord_ della _lovelace_, dove preferite, aprite una nuova scheda ed incollate il codice del file `HA lovelace.txt` ed il risultato sarà questo:
 
