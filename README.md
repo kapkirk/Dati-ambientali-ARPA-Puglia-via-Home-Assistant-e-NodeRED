@@ -1,6 +1,6 @@
-| [italiano](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#acquisizione-dati-inquinanti-ambientali-arpa-puglia-in-home-assistant) | [inglese](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#arpa-puglia-environmental-pollutant-data-acquisition-in-home-assistant) |
+| [italiano](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#acquisizione-dati-inquinanti-ambientali-arpa-puglia-in-home-assistant) | [inglese](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#arpa-puglia-environmental-pollutant-data-acquisition-in-home-assistant) |
 
-![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/HA%20logo2.png)  `          ` ![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Node-RED%20logo.jpg)
+![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/HA%20logo2.png)  `          ` ![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Node-RED%20logo.jpg)
 ---   
 # Acquisizione dati inquinanti ambientali ARPA Puglia in Home Assistant
 
@@ -10,21 +10,21 @@ Una utility [Home Assistant](https://home-assistant.io/) che ti aiuta a visualiz
 
 ## Tavola dei Contenuti
 
-1. **[Descrizione del progetto](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#descrizione-del-progetto)**
+1. **[Descrizione del progetto](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#descrizione-del-progetto)**
 
-2. **[Caratteristiche principali](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#caratteristiche-principali)**
+2. **[Caratteristiche principali](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#caratteristiche-principali)**
 
-3. **[Descrizione del funzionamento](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#descrizione-del-funzionamento)**
+3. **[Descrizione del funzionamento](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#descrizione-del-funzionamento)**
 
-4. **[Installazione](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#installazione)**
-   1. **[Prerequisiti](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#1---prerequisiti)**
-   1. **[Configurazione dei dati da acquisire](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#2---configurazione-dei-dati-da-acquisire)**
-   1. **[Configurazione Home Assistant](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#3---configurazione-home-assistant)**
-   2. **[Configurazione di Node-RED](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#4---configurazione-di-node-red)**
+4. **[Installazione](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#installazione)**
+   1. **[Prerequisiti](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#1---prerequisiti)**
+   1. **[Configurazione dei dati da acquisire](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#2---configurazione-dei-dati-da-acquisire)**
+   1. **[Configurazione Home Assistant](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#3---configurazione-home-assistant)**
+   2. **[Configurazione di Node-RED](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#4---configurazione-di-node-red)**
 
-5. **[Personalizzazione dei flussi di NodeRed](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#personalizzazione-ed-analisi-dei-flussi-nodered)**
+5. **[Personalizzazione dei flussi di NodeRed](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#personalizzazione-ed-analisi-dei-flussi-nodered)**
 
-6. **[Commento del codice](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#commentiamolo)**  
+6. **[Commento del codice](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#commentiamolo)**  
  
 
  
@@ -187,12 +187,12 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 1. Scaricare tutti i files;
 1. La seguente configurazione esporrà i sensori in HA come vedete di seguito:
 
-![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Esposizione%20HA.jpg)
+![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Esposizione%20HA.jpg)
 
 
 1. Nella _Dashbord_ della _lovelace_, dove preferite, aprite una nuova scheda ed incollate il codice del file `HA lovelace.txt`. Sostanzialmente basta elencarli all'nterno della scheda ed il risultato sarà il seguente:
 
-![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Lovelace%20Visualizzazione%20HA.jpg)
+![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Lovelace%20Visualizzazione%20HA.jpg)
 
 codice:
 ```yaml
@@ -348,21 +348,21 @@ A [Home Assistant](https://home-assistant.io/) utility that helps you visualize 
 
 ## Table of Contents
 
-1. **[Project Description](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#project-description)**
+1. **[Project Description](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#project-description)**
 
-2. **[Key Features](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#key-features)**
+2. **[Key Features](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#key-features)**
 
-3. **[Operation Description](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#description-of-operation)**
+3. **[Operation Description](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#description-of-operation)**
 
-4. **[Installation](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#installation)**
-   1. **[Prerequisites](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#1---prerequisites)**
-   1. **[Configuring the Data to Be Captured](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#2---configuring-the-data-to-be-captured)**
-   1. **[Home Assistant Setup](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#3---home-assistant-setup)**
-   2. **[Configuring Node-RED](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#4---configuring-node-red)**
+4. **[Installation](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#installation)**
+   1. **[Prerequisites](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#1---prerequisites)**
+   1. **[Configuring the Data to Be Captured](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#2---configuring-the-data-to-be-captured)**
+   1. **[Home Assistant Setup](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#3---home-assistant-setup)**
+   2. **[Configuring Node-RED](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#4---configuring-node-red)**
 
-5. **[Customizing NodeRed Flows](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#customization-and-analysis-of-nodered-flows)**
+5. **[Customizing NodeRed Flows](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#customization-and-analysis-of-nodered-flows)**
 
-6. **[Code Comment](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#lets-comment-on-it)**  
+6. **[Code Comment](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED#lets-comment-on-it)**  
  
 
  
@@ -536,7 +536,7 @@ All info is available on the website of [ARPA Puglia](https://www.arpa.puglia.it
 1. You can add other sensors if the control units you have chosen show others, the configuration is identical for all of them;
 1. The following configuration will expose the sensors in HA as you see below:
 
-![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Esposizione%20HA.jpg)
+![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Esposizione%20HA.jpg)
 
 
 
@@ -574,7 +574,7 @@ columns:
 
 1. In the _Dashboard_ of the _lovelace_, where you prefer, open a new tab and paste the code of the file `HA lovelace.txt` and the result will be this:
 
- ![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Lovelace%20Visualizzazione%20HA.jpg)
+ ![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Lovelace%20Visualizzazione%20HA.jpg)
 
 code:
 ```yaml
@@ -613,7 +613,7 @@ columns:
 
 `Single Node-RED Flow centralina.json`:
 
- ![nodered1](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Flusso%20Node-RED.jpg)
+ ![nodered1](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Flusso%20Node-RED.jpg)
 
 
 code:
@@ -623,7 +623,7 @@ code:
 
 or `Flusso Node-RED più centralina.json`:
 
-![nodered2](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Flusso%20Node-RED%20pi%C3%B9%20centraline.jpg)
+![nodered2](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Flusso%20Node-RED%20pi%C3%B9%20centraline.jpg)
 
 code:
 ```json
@@ -640,7 +640,7 @@ code:
 
 The flows I have illustrated are obviously worthy of development. Personally, I have been responsible for collecting the data displayed by the control units near the areas where I live, but this does not mean that all the available values can be used, i.e. those shown in the "Main characteristics" table above. The NodeRED flow in this case will be as follows:
 
-![nodered3](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Flusso%20Node-RED%20centralina%20completa.jpg)
+![nodered3](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Flusso%20Node-RED%20centralina%20completa.jpg)
 
 code:
 ```json
