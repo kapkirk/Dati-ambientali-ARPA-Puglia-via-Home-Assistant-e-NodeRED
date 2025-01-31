@@ -187,12 +187,12 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 1. Scaricare tutti i files;
 1. La seguente configurazione esporrà i sensori in HA come vedete di seguito:
 
-![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Esposizione%20HA.png)
+![lovelace1](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Esposizione%20sensori%20in%20HA.png)
 
 
 1. Nella _Dashbord_ della _lovelace_, dove preferite, aprite una nuova scheda ed incollate il codice del file `HA lovelace.txt`. Sostanzialmente basta elencarli all'nterno della scheda ed il risultato sarà il seguente:
 
-![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Lovelace%20Visualizzazione%20HA.png)
+![lovelace2](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Lovelace%20Visualizzazione%20HA.jpg)
 
 codice:
 ```yaml
