@@ -1,6 +1,6 @@
 | [italiano](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#acquisizione-dati-inquinanti-ambientali-arpa-puglia-in-home-assistant) | [inglese](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant#arpa-puglia-environmental-pollutant-data-acquisition-in-home-assistant) |
 
-![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/HA%20logo2.png)  `                 ` ![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Node-RED%20logo.jpg)
+![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/HA%20logo2.png)  `          ` ![](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Node-RED%20logo.jpg)
 ---   
 # Acquisizione dati inquinanti ambientali ARPA Puglia in Home Assistant
 
@@ -70,7 +70,6 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 2. **ELABORAZIONE ED INVIO IN HOME Assistant**:  
    I dati vengono convertiti in sensori esposti direttamente in HA (es. JSON strutturato).
 
-
 3. **Visualizzazione**:  
    Integrazione in dashboard per monitoraggio ambientale centralizzato.
 
@@ -84,7 +83,7 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
   - `node-red-contrib-http-request`
 - Home Assistant installato con le seguenti dipendenze HACS:
   - Custom `flex-table-card` scaricabile (Se volete utilizzare la tabella di visualizzazione come ho fatto io)
-  - Node-RED Companion.
+  - Node-RED Companion installata (componente aggintivo scaricabile da HACS).
 
 
 ### 2 - Configurazione dei dati da acquisire
@@ -191,7 +190,7 @@ Tutte le info sono disponibili sul sito di [ARPA Puglia](https://www.arpa.puglia
 ![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Esposizione%20HA.jpg)
 
 
-1. Nella _Dashbord_ della _lovelace_, dove preferite, aprite una nuova scheda ed incollate il codice del file `HA lovelace.txt` ed il risultato sarà questo:
+1. Nella _Dashbord_ della _lovelace_, dove preferite, aprite una nuova scheda ed incollate il codice del file `HA lovelace.txt`. Sostanzialmente basta elencarli all'nterno della scheda ed il risultato sarà il seguente:
 
 ![lovelace](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant/blob/main/images/Lovelace%20Visualizzazione%20HA.jpg)
 
@@ -257,7 +256,7 @@ I flussi da me illustrati sono ovviamente meritevoli di sviluppo. Personalmente 
 
 1. Tramite una chiamata giornaliera alle ore 12.00 lancio l'aggiornamento dei sensori (le rilevazioni sono aggiornate al giorno precedente, quindi non ha senso ripeterla più volte al giorno) tramite il nodo `inject`;
 2. Il successivo nodo `http request` è il nodo che invia la stringa per la chiamata dei dati, personalizzabile come detto prima;
-3. Il nodo `csv` riceve i dati e li interpreta suddividendoli;
+3. Il nodo `csv` riceve i dati e li interpreta suddividendoli all'interno di un _array_;
 4. Il nodo `function` che segue, denominato `Estrae i dati delle misurazioni`, suddivide l'_array_ ricevuto in stringhe separate producendo più _payload_ per quante sono le righe trasmesse dalla centralina.
      Qui interviene l`ulteriore personalizzazione, come faccio a sapere quali inquinanti espone una centralina? La risposta non è complessa:
      1. andare sul sito dei [dati ARPA](https://dati.arpa.puglia.it/openapi/index.html)
@@ -268,12 +267,12 @@ I flussi da me illustrati sono ovviamente meritevoli di sviluppo. Personalmente 
      6. inserite nel campo `id-station` il numero identificativo della centralina che vi interessa, ad esempio `104`
      7. cliccare su `debug-mode` ed impostare a `true` così da avere la risposta a video (non cambia nulla, se lasciate l`impostazione si  `false` vi scaricherà un file di testo con i dati)
      8. quindi cliccare si `Execute`
-     9. dopo pochi secondi otterrete la seguente risposta:
-        il link per ottenere i dati, nel caso che ci occupa, sarà:
+     9. dopo pochi secondi otterrete diverse risposte:
+        -il link per ottenere i dati, nel caso che ci occupa, sarà:
 
-                                 https://dati.arpa.puglia.it/api/v1/measurements?language=ITA&format=CSV&id_station=104&debugMode=true
+            https://dati.arpa.puglia.it/api/v1/measurements?language=ITA&format=CSV&id_station=104&debugMode=true
 
-        Nella successiva sezione `Response body` potremo leggere i seguenti dati:
+        -Nella successiva sezione `Response body` potremo leggere i seguenti dati:
 ```yaml
          <pre>=== measurements/executeQuery ===
 formatParam: CSV
@@ -291,10 +290,10 @@ formatParam: CSV
 ```
 
    
-5. Il nodo `function` che segue, denominato `divide i messaggi per ogni inquinante`, è dotate di tante uscite quanti sono le righe dell'_array_ ricevuto. Quindi se una centralina espone 6 inquinanti, bisognerà modificarlo come segue:
-   Nella Scheda `setup` va modificato il numero delle uscite che sarà uguale al numero degli inquinanti esposti;
-   Nella Scheda `on message` va
-   - modificata la riga `if (misurazioni.length >= 9) {` ed inserito il numero die valori da acquisire, quelli esposti sopra, esclusa la prima riga, quindi se ci sono righe di dati inseriremo 8;
+5. Il nodo `function` che segue, denominato `divide i messaggi per ogni inquinante`, è dotato di tante uscite quante sono le righe dell'_array_ ricevuto. Quindi se una centralina espone 6 inquinanti, bisognerà modificarlo come segue:
+   Nella Scheda `setup` va modificato il numero delle uscite che sarà uguale al numero degli inquinanti acquisiti;
+   Nella Scheda `on message` va:
+   - modificata la riga `if (misurazioni.length >= 9) {` ed inserito il numero dei valori da acquisire, quelli esposti sopra, esclusa la prima riga, quindi se ci sono righe di dati inseriremo 8;
    -inserita una striga `let msg1 = { payload: misurazioni[0] };` per ogni inquinante esposto, partendo da `misurazioni[0]`, così ad esempio:
 ```yaml
               let msg1 = { payload: misurazioni[0] }; // Primo oggetto
@@ -308,15 +307,30 @@ formatParam: CSV
               let msg9 = { payload: misurazioni[8] }; // nono oggetto
 ```
 
-ovviamente poi modificheremo anche il successivo messaggio di  `return` del _payload_, inserirendo o eliminando i `msgx` che servono omeno, ottenendo quindi:
+ovviamente poi modificheremo anche il successivo messaggio di  `return` del _payload_, inserirendo o eliminando i `msgx` che servono o meno, ottenendo quindi, ad esempio:
 
 ```yaml 
           return [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9];` 
 ```
 
-in questo modo avremo una uscita per ogni inquinante a cui collegheremo, nello stesso ordine mostrato dall'API, il nodo sensore che ritroveremo poi direttamente in HA. I nodi sensore, per maggiore chiarezza e celerità, li ho denominati così come previsto dalla sigla breve utilizzata nella stessa API regionale.
+in questo modo avremo una uscita per ogni inquinante a cui collegheremo, nello stesso ordine mostrato dall'API, il nodo sensore che ritroveremo poi direttamente in HA. I nodi sensore, per maggiore chiarezza e celerità, li ho denominati così come previsto dalla sigla breve utilizzata nella stessa API regionale. La loro configurazione in Node-RED è la seguente:
+
+![NR1](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Configurazione%20nodo%20sensore.png)
+
+con le seguenti proprietà:
+
+![NR2](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Configurazione%20nodo%20sensore%20-%20proprieta.png)
+
+
 6. Prima di arrivare alla pubblicazione del dato ho dovuto inserire un nuovo nodo `function` denominato `formatta in valore "valore" in caso di errore` che ha lo scopo di sostituire i dati non pervenuti, esposti dalle API con la dicitura `null`, modificandoli in `0`. Questo si è reso necessario perchè altrimenti Home Assistant non è in grado di interpetrare il dato restituendo così un errore generale del sensore che non esporrà nulla.
-7. Al primo lancio dell'automazione creata, potremo recarci in HA, e tra le entitá potremo notare i nostri sensori appena creati. La struttura sará identica per tutti, cambierà solo il nome del sensore: 
+7. Al primo lancio dell'automazione creata, potremo recarci in HA, e tra le entitá presenti nella scheda `impostazioni/Dispositivi/Node-RED Companion`potremo notare i nostri sensori appena creati. La struttura sará identica per tutti, cambierà solo il nome del sensore. Avremo quindi la seguente visualizzazione:
+
+![HA1](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Esposizione%20sensori%20in%20HA.png) 
+
+con le seguenti caratteristiche individuali:
+
+![HA2](https://github.com/kapkirk/Dati-ambientali-ARPA-Puglia-via-Home-Assistant-e-NodeRED/blob/main/images/Caratteristiche%20del%20sensore%20in%20HA.png) 
+
 
 
 
